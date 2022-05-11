@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation(compose.materialIconsExtended)
 }
 
 tasks.withType<KotlinCompile> {
@@ -31,6 +32,11 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "DeceptionMurderInHK"
             packageVersion = "1.0.0"
+
+            val iconRoot = project.file("src/main/resources/icons")
+            macOS {
+                iconFile.set(iconRoot.resolve("mihk.icns"))
+            }
         }
     }
 }
