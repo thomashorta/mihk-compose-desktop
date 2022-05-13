@@ -105,7 +105,8 @@ class TimerController(
             while (currentTimeState.value > 0L) {
                 delay(TIMER_TICK)
                 val now = System.currentTimeMillis()
-                currentTimeState.value -= now - lastTick
+                val newValue = currentTimeState.value - (now - lastTick)
+                currentTimeState.value = newValue.coerceIn(0L, timeMillis)
                 lastTick = now
             }
             onTimerEnd()
